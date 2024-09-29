@@ -1,16 +1,17 @@
-.login-container {
+.signup-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background-color: white;
   padding: 20px;
+  /* Add padding for smaller screens */
 }
 
-.login-form-container {
+.signup-form-container {
   display: flex;
-  flex-direction: row; /* Default layout for larger screens */
-  height: auto;
+  flex-direction: row;
+  /* Default for larger screens */
   max-width: 900px;
   width: 100%;
   background-color: #fff;
@@ -19,72 +20,72 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.login-image {
+.signup-image {
   flex: 1;
-  background-image: url('../public/img/logimg.webp');
+  background-image: url('../img/logimg.webp');
   background-size: cover;
   background-position: center;
   padding: 40px;
   color: #fff;
 }
 
-.login-image h2 {
+.signup-image h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.login-image p {
+.signup-image p {
   font-size: 16px;
   margin-bottom: 20px;
 }
 
-.login-form {
+.signup-form {
   flex: 1;
   padding: 40px;
 }
 
-.login-form h3 {
+.signup-form h3 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-.login-form h4 {
+.signup-form h4 {
   font-size: 18px;
   margin-bottom: 20px;
 }
 
-.form-group {
+.signup-form-group {
   margin-bottom: 10px;
 }
 
-.form-group label {
+.signup-form-group label {
   display: block;
   font-size: 14px;
   margin-bottom: 5px;
 }
 
-.form-group input {
+.signup-form-group input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.checkbox-group {
+.signup-checkbox-group {
   display: inline;
 }
 
-.checkbox-group input {
+.signup-checkbox-group input {
   margin-right: 2px;
 }
 
-.error {
+.signup-error {
   color: red;
   font-size: 12px;
   margin-top: 5px;
 }
 
-.login-button {
+.signup-button {
   width: 100%;
   padding: 10px;
   background-color: #000;
@@ -95,7 +96,7 @@
   margin-top: 10px;
 }
 
-.register-button {
+.log-button {
   width: 100%;
   padding: 10px;
   background-color: #ddd;
@@ -107,44 +108,60 @@
 }
 
 
-@media screen and (max-width: 768px) {
-  .login-form-container {
-    flex-direction: column; 
+@media (max-width: 768px) {
+  .signup-form-container {
+    flex-direction: column;
+    max-width: 100%;
     border-radius: 20px;
   }
 
-  .login-image {
+  .signup-image {
     padding: 20px;
-    text-align: center; 
+    text-align: center;
   }
 
-  .login-form {
-    padding: 20px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .login-image {
-    display: none; 
-  }
-
-  .login-form {
+  .signup-form {
     padding: 20px;
   }
 
-  .login-form h3 {
-    font-size: 20px; 
+  .signup-form h3 {
+    font-size: 20px;
   }
 
-  .login-form h4 {
+  .signup-form h4 {
     font-size: 16px;
   }
 
-  .form-group input {
+  .signup-form-group input {
     padding: 8px;
   }
 
-  .login-button, .register-button {
+  .signup-button,
+  .log-button {
     padding: 8px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .signup-form {
+    padding: 15px;
+  }
+
+  .signup-form h3 {
+    font-size: 18px;
+  }
+
+  .signup-form h4 {
+    font-size: 14px;
+  }
+
+  .signup-form-group input {
+    padding: 6px;
+  }
+
+  .signup-button,
+  .log-button {
+    padding: 6px;
   }
 }
