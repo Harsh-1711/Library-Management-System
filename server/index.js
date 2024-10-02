@@ -1,7 +1,9 @@
 require("dotenv").config({ path: "./config/.env" });
+require("./config/conn");
+const path = require("path");
 const express = require("express");
+const UserRouter = require("./routes/user.routes");
 const cors = require("cors");
-const mongoose = require("mongoose");
 
 const port = process.env.PORT || 3001;
 const app = express();
@@ -13,19 +15,12 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-// MongoDB connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((error) => console.error("MongoDB connection error:", error));
+app.use("/assets", express.static(path.join(__dirname, "assets")));
 
 app.get("/", (req, res) => {
   return res.json({ msg: "Hello Server" });
 });
-// app.use("/api/users", UserRouter);
-// app.use("/api/buyers", BuyerRouter);
-// app.use("/api/email", sendMail);
+app.use("/api/users", UserRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

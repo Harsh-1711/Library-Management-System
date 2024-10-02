@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 import "../assets/css/Login.css";
 
 function Login() {
@@ -16,16 +16,21 @@ function Login() {
 
   const validate = () => {
     let errors = {};
+    if (!email && !password) {
+      toast.error("Please fill all the fields");
+      return false;
+    }
     if (!email) {
-      errors.email = "Email is required";
+      toast.error("Email is required");
+      return false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Email is invalid";
+      toast.error("Email is invalid");
+      return false;
     }
 
     if (!password) {
-      errors.password = "Password is required";
-    } else if (password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
+      toast.error("Password is required");
+      return false;
     }
 
     setErrors(errors);
@@ -36,20 +41,38 @@ function Login() {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post("http://localhost:3000/api/login", {
-          email,
-          password,
-        });
+        const response = await axios.post(
+          "http://localhost:8080/api/users/login",
+          {
+            email,
+            password,
+          }
+        );
 
         if (response.data.success) {
+          toast.success("Login successful!");
           console.log("Login successful:", response.data);
           navigate("/");
         } else {
-          setErrors({ ...errors, login: "Invalid email or password" });
+          toast.error(response.data.error || "Invalid email or password");
+          setErrors({
+            ...errors,
+            login: response.data.error || "Invalid email or password",
+          });
         }
       } catch (error) {
         console.error("Login error:", error);
-        setErrors({ ...errors, login: "An error occurred while logging in" });
+        if (error.response) {
+          toast.error(error.response.data.error);
+          setErrors({
+            ...errors,
+            login:
+              error.response.data.error || "An error occurred while logging in",
+          });
+        } else {
+          toast.error("An unexpected error occurred. Please try again later.");
+          setErrors({ ...errors, login: "An unexpected error occurred." });
+        }
       }
     }
   };
