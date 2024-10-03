@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../assets/css/Signup.css";
+import InputField from "./InputField"; 
+import Button from "./Button"; 
 
 function Signup() {
+  const [fullName, setFullName] = useState(""); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -12,12 +15,21 @@ function Signup() {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    navigate("/");
+    navigate("/Login");
   };
 
-  // Validation function
+  
   const validate = () => {
     let errors = {};
+
+    if (!fullName && !email && !password && !confirmPassword) {
+      toast.error("Please fill all the fields");
+      return false;
+    }
+
+    if (!fullName) {
+      toast.error("Full Name is required");
+    }
 
     if (!email) {
       toast.error("Email is required");
@@ -46,6 +58,7 @@ function Signup() {
     if (validate()) {
       try {
         const response = await axios.post("http://localhost:8080/api/signup", {
+          fullName,
           email,
           password,
         });
@@ -69,63 +82,70 @@ function Signup() {
         <div className="signup-image">
           <h2>
             "The only person who is educated is the one who has learned how to
-            learn...and change."{" "}
+            learn...and change."
           </h2>
           <p>— Carl Rogers</p>
         </div>
         <div className="signup-form">
           <h3>Get Started with Your Account</h3>
-          <h4>Sign In</h4>
+          <h4>Sign Up</h4>
           <p>Create your account to explore more.</p>
           <form onSubmit={handleSubmit}>
-            <div className="signup-form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {errors.email && <p className="error">{errors.email}</p>}
-            </div>
-            <div className="signup-form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {errors.password && <p className="error">{errors.password}</p>}
-            </div>
-            <div className="signup-form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              {errors.confirmPassword && (
-                <p className="error">{errors.confirmPassword}</p>
-              )}
-            </div>
+            
+            <InputField
+              label="Full Name"
+              type="text"
+              id="fullName"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Enter your full name"
+            />
+         
+            <InputField
+              label="Email"
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+            />
+           
+            <InputField
+              label="Password"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+            />
+           
+            <InputField
+              label="Confirm Password"
+              type="password"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm your password"
+            />
+
             <div className="signup-checkbox-group">
               <input type="checkbox" id="agreeTerms" />
               <label htmlFor="agreeTerms">
                 I agree to the terms and conditions
               </label>
             </div>
-            <button type="submit" className="signup-button">
-              Sign In
-            </button>
-            {errors.signin && <p className="error">{errors.signin}</p>}
+
+
+            <Button type="submit" label="Sign Up" className="signup-button" />
           </form>
           <p>
             Already have an account?{" "}
-            <button className="log-link" onClick={handleLoginClick}>
-              Log In
-            </button>
+            <Button
+              type="button"
+              label="Log In"
+              className="log-link"
+              onClick={handleLoginClick}
+            />
           </p>
         </div>
       </div>

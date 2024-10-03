@@ -109,6 +109,13 @@
 
 
 @media screen and (max-width: 768px) {
+  .login-container {
+    flex-direction: column; 
+    padding: 15px; 
+    height: auto; 
+  }
+
+  
   .login-form-container {
     flex-direction: column;
     border-radius: 20px;
