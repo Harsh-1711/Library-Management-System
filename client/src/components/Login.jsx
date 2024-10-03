@@ -3,6 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../assets/css/Login.css";
+import InputField from "./InputField"; 
+import Button from "./Button"; 
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,8 +17,10 @@ function Login() {
     navigate("/Signup");
   };
 
+  
   const validate = () => {
     let errors = {};
+
     if (!email && !password) {
       toast.error("Please fill all the fields");
       return false;
@@ -89,43 +94,46 @@ function Login() {
           <h4>Login</h4>
           <p>Welcome Back! Let's pick up where you left off.</p>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="text"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {errors.email && <p className="error">{errors.email}</p>}
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {errors.password && <p className="error">{errors.password}</p>}
-            </div>
+           
+            <InputField
+              label="Email"
+              type="text"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+            />
+
+           
+            <InputField
+              label="Password"
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+            />
+
+            
             <div className="checkbox-group">
               <input type="checkbox" id="rememberMe" />
               <label htmlFor="rememberMe">Remember me</label>
             </div>
-            <button type="submit" className="login-button">
-              Log in
-            </button>
-            <button
+
+           
+            <Button type="submit" label="Log in" className="login-button" />
+
+          
+            <Button
               type="button"
+              label="Register"
               className="register-button"
               onClick={handleRegisterClick}
-            >
-              Register
-            </button>
+            />
+
             {errors.login && <p className="error">{errors.login}</p>}
           </form>
-          <Link to="/forgot"> Forgot Password?</Link>
+          <Link to="/forgot">Forgot Password?</Link>
         </div>
       </div>
     </div>

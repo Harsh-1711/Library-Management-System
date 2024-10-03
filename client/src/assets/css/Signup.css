@@ -3,15 +3,14 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: white;
+  background-color:white;
   padding: 20px;
-  /* Add padding for smaller screens */
+  
 }
 
 .signup-form-container {
   display: flex;
   flex-direction: row;
-  /* Default for larger screens */
   max-width: 900px;
   width: 100%;
   background-color: #fff;
@@ -109,6 +108,13 @@
 
 
 @media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column; 
+    padding: 15px; 
+    height: auto; 
+  }
+
+ 
   .signup-form-container {
     flex-direction: column;
     max-width: 100%;
