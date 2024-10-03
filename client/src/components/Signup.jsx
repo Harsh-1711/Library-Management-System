@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../assets/css/Signup.css";
-import InputField from "./InputField"; 
-import Button from "./Button"; 
+import InputField from "./InputField";
+import Button from "./Button";
 
 function Signup() {
-  const [fullName, setFullName] = useState(""); 
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -18,7 +18,6 @@ function Signup() {
     navigate("/Login");
   };
 
-  
   const validate = () => {
     let errors = {};
 
@@ -91,7 +90,6 @@ function Signup() {
           <h4>Sign Up</h4>
           <p>Create your account to explore more.</p>
           <form onSubmit={handleSubmit}>
-            
             <InputField
               label="Full Name"
               type="text"
@@ -100,7 +98,7 @@ function Signup() {
               onChange={(e) => setFullName(e.target.value)}
               placeholder="Enter your full name"
             />
-         
+
             <InputField
               label="Email"
               type="text"
@@ -109,7 +107,7 @@ function Signup() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
             />
-           
+
             <InputField
               label="Password"
               type="password"
@@ -118,7 +116,7 @@ function Signup() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
             />
-           
+
             <InputField
               label="Confirm Password"
               type="password"
@@ -134,7 +132,6 @@ function Signup() {
                 I agree to the terms and conditions
               </label>
             </div>
-
 
             <Button type="submit" label="Sign Up" className="signup-button" />
           </form>
