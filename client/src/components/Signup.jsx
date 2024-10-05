@@ -28,24 +28,31 @@ function Signup() {
 
     if (!fullName) {
       toast.error("Full Name is required");
+      return false;
     }
 
     if (!email) {
       toast.error("Email is required");
+      return false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       toast.error("Email is invalid");
+      return false;
     }
 
     if (!password) {
       toast.error("Password is required");
+      return false;
     } else if (password.length < 6) {
       toast.error("Password must be at least 6 characters");
+      return false;
     }
 
     if (!confirmPassword) {
       toast.error("Confirm your password");
+      return false;
     } else if (password !== confirmPassword) {
       toast.error("Passwords do not match");
+      return false;
     }
 
     setErrors(errors);
@@ -54,27 +61,38 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (validate()) {
       try {
-        // console.log(fullName, email, password);
         const response = await axios.post(
           "http://localhost:8080/api/users/signup",
           {
-            fullName,
+            name: fullName,
             email,
             password,
           }
         );
+
         if (response.data.success) {
           toast.success("Signup successful");
           console.log("Signup successful:", response.data);
-          navigate("/");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         } else {
           toast.error(response.data.message);
         }
       } catch (error) {
         console.error("Signup error:", error);
-        setErrors({ ...errors, signin: "An error occurred while signup" });
+
+        if (error.response && error.response.data) {
+          toast.error(error.response.data.message);
+        } else {
+          setErrors({
+            ...errors,
+            signin: "An unexpected error occurred. Please try again.",
+          });
+        }
       }
     }
   };
