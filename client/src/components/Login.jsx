@@ -1,23 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../assets/css/Login.css";
-import InputField from "./InputField"; 
-import Button from "./Button"; 
-
+import InputField from "./InputField";
+import Button from "./Button";
+import Cookies from "js-cookie";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-
+  const token = Cookies.get("token");
+  console.log(token);
   const handleRegisterClick = () => {
     navigate("/Signup");
   };
 
-  
+  useEffect(() => {
+    const handleAuthorization = () => {
+      axios
+        .get("/api/auth")
+        .then((res) => {
+          navigate("/");
+          console.log(res.data);
+        })
+        .catch((err) => {
+          navigate("/login");
+          console.log(err);
+        });
+    };
+    handleAuthorization();
+  }, []);
+
   const validate = () => {
     let errors = {};
 
@@ -41,7 +57,7 @@ function Login() {
     setErrors(errors);
     return Object.keys(errors).length === 0;
   };
-
+  axios.defaults.withCredentials = true;
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
@@ -56,7 +72,6 @@ function Login() {
 
         if (response.data.success) {
           toast.success("Login successful!");
-          console.log("Login successful:", response.data);
           navigate("/");
         } else {
           toast.error(response.data.error || "Invalid email or password");
@@ -94,7 +109,6 @@ function Login() {
           <h4>Login</h4>
           <p>Welcome Back! Let's pick up where you left off.</p>
           <form onSubmit={handleSubmit}>
-           
             <InputField
               label="Email"
               type="text"
@@ -104,7 +118,6 @@ function Login() {
               placeholder="Enter your email"
             />
 
-           
             <InputField
               label="Password"
               type="password"
@@ -114,24 +127,19 @@ function Login() {
               placeholder="Enter your password"
             />
 
-            
             <div className="checkbox-group">
               <input type="checkbox" id="rememberMe" />
               <label htmlFor="rememberMe">Remember me</label>
             </div>
 
-           
             <Button type="submit" label="Log in" className="login-button" />
 
-          
             <Button
               type="button"
               label="Register"
               className="register-button"
               onClick={handleRegisterClick}
             />
-
-            {errors.login && <p className="error">{errors.login}</p>}
           </form>
           <Link to="/forgot">Forgot Password?</Link>
         </div>
