@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Harsh kumar, Akshara Sharma, Varun Chauhan and Nimisha Negi",
+  "author": "Harsh kumar",
   "license": "ISC",
   "keywords": [],
   "description": "",
