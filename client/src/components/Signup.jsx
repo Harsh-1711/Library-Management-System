@@ -56,17 +56,21 @@ function Signup() {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post("http://localhost:8080/api/signup", {
-          fullName,
-          email,
-          password,
-        });
+        // console.log(fullName, email, password);
+        const response = await axios.post(
+          "http://localhost:8080/api/users/signup",
+          {
+            fullName,
+            email,
+            password,
+          }
+        );
         if (response.data.success) {
           toast.success("Signup successful");
           console.log("Signup successful:", response.data);
           navigate("/");
         } else {
-          setErrors({ ...errors, signup: "Signup failed" });
+          toast.error(response.data.message);
         }
       } catch (error) {
         console.error("Signup error:", error);
