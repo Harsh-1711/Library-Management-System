@@ -1,24 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-
+import React, { useState, useEffect } from "react"; 
+import { Link } from "react-router-dom";
 import "../assets/css/home.css";
-import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faHeart, faStore } from '@fortawesome/free-solid-svg-icons';
-import {FaFacebookF, FaTwitter, FaInstagram, FaPinterestP, FaYoutube } from "react-icons/fa";
-import { faUser } from '@fortawesome/free-solid-svg-icons'; // Add faUser here
-
+import { faBook, faHeart, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FaFacebookF, FaTwitter, FaInstagram, FaPinterestP, FaYoutube } from "react-icons/fa";
 
 const Home = () => {
-  const [showSellerDropdown, setShowSellerDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [userName, setUserName] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
+  const [avatar, setAvatar] = useState("");
+
+  const handleNameChange = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const handleAvatarUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Open popup function
+  const openPopup = () => {
+    setShowPopup(true);
+    setShowUserDropdown(false); // Close dropdown if it's open
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  const handleUpdate = () => {
+    console.log("Profile updated", { userName, avatar });
+    closePopup(); // Close the popup after updating
+  };
 
   const images = [
     '/src/assets/img/slider2.jpg',
     '/src/assets/img/slider3.jpg',
-    // '/img/slider4.jpg'
   ];
 
   useEffect(() => {
@@ -28,61 +54,79 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const toggleSellerDropdown = () => {
-    setShowSellerDropdown(true);
-    setShowUserDropdown(false);
-  };
-
   const toggleUserDropdown = () => {
     setShowUserDropdown(!showUserDropdown); // Toggle dropdown visibility
-    setShowSellerDropdown(false);
   };
 
   return (
     <div>
-     <section id="header">
-  <Link className="logo">
-  <FontAwesomeIcon icon={faBook} />
-  
-    <span>LMS</span>
-  </Link>
-  <div>
-    <ul id="navbar">
-      <li><Link className="active" to="/">Home</Link></li>
-      <li><Link to="/About">About</Link></li>
-      <li><Link to="/Contact">Contact</Link></li>
-      <li>
-        <Link to="/Cart">
-          <FontAwesomeIcon icon={faStore} />
-          <span style={{ marginLeft: '5px' }}></span>
+      <section id="header">
+        <Link className="logo">
+          <FontAwesomeIcon icon={faBook} />
+          <span>LMS</span>
         </Link>
-      </li>
-      <li onMouseEnter={toggleUserDropdown} onMouseLeave={() => setShowUserDropdown(false)}>
-        <FontAwesomeIcon icon={faUser} />
-        {showUserDropdown && (
-          <div className="user-dropdown">
-            <Link to="/signin">Sign In</Link>
-            <Link to="/register">Account</Link>
-            <Link to="/my-account">Favourites</Link>
-            <Link to="/orders">Sign Out</Link>
+        <div>
+          <ul id="navbar">
+            <li><Link className="active" to="/">Home</Link></li>
+            <li><Link to="/About">About</Link></li>
+            <li><Link to="/Contact">Contact</Link></li>
+            <li onMouseEnter={toggleUserDropdown} onMouseLeave={() => setShowUserDropdown(false)} style={{ position: 'relative' }}>
+            <FontAwesomeIcon icon={faUser} style={{ color: 'black' }} />
+            
+              {showUserDropdown && (
+                <div className="user-dropdown">
+                  <Link to="/signin">Sign In</Link>
+                  <div onClick={openPopup} className="account">Account</div> {/* Apply left alignment for Account */}
+                  
+                  
+                  <Link to="/my-account">Favourites</Link>
+                  <Link to="/orders">Sign Out</Link>
+                </div>
+              )}
+            </li>
+            <div style={{ textAlign: 'center', marginTop: '5px' }}>
+              {avatar && (
+                <img src={avatar} alt="Avatar" style={{ width: "30px", height: "30px", borderRadius: "50%" }} />
+              )}
+              <p style={{ color: '#333', margin: '0' }}>Hello, {userName || "User"}</p>
+            </div>
+          </ul>
+        </div>
+      </section>
+
+      {/* Popup Form for Profile Update */}
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <h3>Update Profile</h3>
+            <label htmlFor="avatar-upload" style={{ cursor: 'pointer' }}>
+              {avatar ? (
+                <img src={avatar} alt="Avatar" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+              ) : (
+                <div style={{ width: "50px", height: "50px", borderRadius: "50%", border: "1px dashed #ccc", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                  <span>Avatar</span>
+                </div>
+              )}
+            </label>
+            <input type="file" accept="image/*" onChange={handleAvatarUpload} id="avatar-upload" style={{ display: 'none' }} />
+            <input type="text" placeholder="Enter your name" value={userName} onChange={handleNameChange} />
+            <input type="password" placeholder="Enter new password" />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <button onClick={closePopup} style={{ marginRight: '5px' }}>Close</button>
+              <button onClick={handleUpdate}>Update</button>
+            </div>
           </div>
-        )}
-      </li>
-    </ul>
-  </div>
-</section>
+        </div>
+      )}
 
-
-
-        {/* Offer Section with Slider */}
-        <div className="offer-container">
+       {/* Offer Section with Slider */}
+       <div className="offer-container">
         <img className="offer-slider" src={images[currentSlide]} alt="Offer Slide" />
         <div className="text-content">
           <h1>Welcome to Our Library</h1>
           <h2>Exclusive Reading Experiences</h2>
           {/* <h2>For Book Lovers & Scholars</h2> */}
-          <p>Get access to thousands of books and resources. <br></br>
-            Special membership discounts available!</p>
+       
           <button>Join Now</button>
         </div>
       </div>
@@ -127,21 +171,28 @@ const Home = () => {
             className="heart-icon"
             onClick={(e) => {
               e.preventDefault();
-              e.currentTarget.classList.toggle('active');
+              const heartIcon = e.currentTarget;
+              heartIcon.classList.toggle('active');
+
+              if (heartIcon.classList.contains('active')) {
+                alert(`${product.title} has been added to favourites!`);
+              } else {
+                alert(`${product.title} has been removed from favourites!`);
+              }
             }}
           >
-          
-          <FontAwesomeIcon icon={faHeart} />
+            <FontAwesomeIcon icon={faHeart} />
           </Link>
         </div>
         <div className="des">
-          <h5>{product.title}</h5>
+          {/* Bold the title using inline styling */}
+          <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#171b19", margin: 0, fontStyle: "italic" }}>{product.title}</h5>
         </div>
-       
       </div>
     ))}
   </div>
 </section>
+
 
 
  {/* New Arrivals Section */}
@@ -166,22 +217,27 @@ const Home = () => {
             className="heart-icon"
             onClick={(e) => {
               e.preventDefault();
-              e.currentTarget.classList.toggle('active');
+              const heartIcon = e.currentTarget;
+              heartIcon.classList.toggle('active');
+
+              if (heartIcon.classList.contains('active')) {
+                alert(`${product.title} has been added to favourites!`);
+              } else {
+                alert(`${product.title} has been removed from favourites!`);
+              }
             }}
           >
-             <FontAwesomeIcon icon={faHeart} />
-            {/* <i className="fas fa-heart"></i> */}
+            <FontAwesomeIcon icon={faHeart} />
           </Link>
         </div>
         <div className="des">
-          <h5>{product.title}</h5>
-          <h4>{product.price}</h4>
+          {/* Bold the title using inline styling */}
+          <h5 style={{ fontSize: "1rem", fontWeight: "bold", color: "#171b19", margin: 0, fontStyle: "italic" }}>{product.title}</h5>
         </div>
       </div>
     ))}
   </div>
 </section>
-
 
 
       {/* Newsletter Section */}
@@ -225,8 +281,8 @@ const Home = () => {
           <h4>My Account</h4>
           <a href="#">Sign In</a>
           <a href="#">View Borrowed Books</a>
-          <a href="#">My Wishlist</a>
-          <a href="#">Track My Order</a>
+          {/* <a href="#">My Wishlist</a> */}
+          {/* <a href="#">Track My Order</a> */}
           <a href="#">Help</a>
         </div>
         <div className="col install">

@@ -1,43 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100,200,300,400,500,600,700,800,900&display=swap');
 
 
-
+/* 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Spartan', sans-serif;
-}
+} */
 
-h1 {
+/* h1 {
     font-size: 50px;
     line-height: 64px;
     color: #222;
-}
+} */
 
-h2 {
+/* h2 {
     font-size: 46px;
     line-height: 54px;
     color: #222;
-}
+} */
 
-h4 {
+/* h4 {
     font-size: 20px;
     /* line-height: 64px; */
-    color: #222;
-}
+    /* color: #222; */
+/* } */
 
-h6 {
+/* h6 {
     font-weight: 700;
     font-size: 12px;
-}
+}  */
 
-p {
+/* p {
     font-size: 20px;
     color: #4f4d4d;
     margin: 15px 0 20px 0;
     font-weight: 600;
-}
+} */
 /* Ensure the nav bar is displayed flexibly */
 #navbar {
     display: flex;
@@ -99,13 +99,15 @@ body {
   .heart-icon:hover {
     transform: scale(1.2);
   }
+ 
+  
 /* Navbar Styling */
 /* Navbar Styling */
 #header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0056b3; /* Blue background */
+    background-color: #0fb300; /* Blue background */
     padding: 10px 20px; /* Adjust as needed */
     color: white; /* Text color */
   }
@@ -120,23 +122,10 @@ body {
     position: relative; /* For dropdown positioning */
   }
   
-  /* Profile Icon and Dropdown */
-  .user-dropdown {
-    position: absolute;
-    top: 100%; /* Aligns dropdown below the navbar */
-    left: 0; /* Aligns dropdown with the profile icon */
-    background-color: white; /* Background color for dropdown */
-    border: 1px solid #ccc; /* Border for dropdown */
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    z-index: 1000; /* Ensure it appears above other elements */
-    opacity: 0; /* Start hidden */
-    transition: opacity 0.2s ease; /* Fade-in transition */
-    visibility: hidden; /* Start hidden */
-  }
   
-  /* Show dropdown when hovering over the profile icon */
-  #navbar li:hover .user-dropdown {
+  
+/* Show dropdown when hovering over the profile icon */
+#navbar li:hover .user-dropdown {
     opacity: 1;
     visibility: visible;
   }
@@ -146,6 +135,65 @@ body {
     padding: 5px 10px;
     text-decoration: none;
     color: black;
+  }
+  
+
+  
+
+  .user-dropdown {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 10;
+    padding: 10px;
+    width: 150px;
+  }
+  
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px; /* Adjust width to make it smaller */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .popup-content h3 {
+    margin: 0 0 10px 0;
+  }
+  
+  .popup-content input[type="text"],
+  .popup-content input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .popup-content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .popup-content button:hover {
+    background-color: #0056b3;
   }
   
   .user-dropdown a:hover {
@@ -180,9 +228,144 @@ body {
   }
   
   .user-dropdown {
-    border-radius: 5px; /* Optional: Add slight rounding to dropdown corners */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row; /* Arrange items in a row */
+    justify-content: space-around; /* Ensure equal spacing between items */
+    align-items: center;
+    width: 300px; /* Adjust the width as needed */
+    padding: 10px;
   }
   
+  .user-dropdown a {
+    color: black; /* Set the text and icon color to black */
+    font-weight: bold;
+    text-align: center;
+    flex: 1; /* Ensures equal spacing between links */
+    padding: 10px;
+    text-decoration: none;
+  }
+  
+  .user-dropdown a:hover {
+    background-color: #f0f0f0; /* Optional hover effect */
+  }
+  
+  .user-dropdown .fa-user {
+    color: black; /* Make the icon black */
+  }
+  
+  .popup-content {
+    /* Adjust the width to center-align properly */
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center; /* Center-align the form */
+  }
+  
+  .popup-content input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .popup-content button {
+    padding: 10px;
+    width: 48%;
+  }
+  .user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column; /* Stack items in a column */
+    width: 200px; /* Adjust width as needed */
+    padding: 10px;
+  }
+  
+  .user-dropdown a, .user-dropdown div {
+    color: black; /* Set the text color to black */
+    font-weight: bold;
+    text-align: left; /* Align text to the left */
+    padding: 10px 15px; /* Add padding for better spacing */
+    text-decoration: none;
+    width: 100%; /* Full width for each item */
+    cursor: pointer;
+  }
+  
+  .user-dropdown a:hover, .user-dropdown div:hover {
+    background-color: #f0f0f0; /* Optional hover effect */
+  }
+  
+  .user-dropdown .fa-user {
+    color: black; /* Ensure the icon is black */
+  }
+  
+  .popup-content {
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .popup-content input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .popup-content button {
+    padding: 10px;
+    width: 48%;
+  }
+    
+
+  .user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column; /* Stack items in a column */
+    width: 200px; /* Adjust width as needed */
+    padding: 10px;
+  }
+  
+  .user-dropdown a, .user-dropdown div {
+    color: black; /* Set the text color to black */
+    font-weight: bold;
+    text-align: center; /* Center all text */
+    padding: 10px 15px; /* Add padding for better spacing */
+    text-decoration: none;
+    width: 100%; /* Full width for each item */
+    cursor: pointer;
+  }
+  
+  .user-dropdown .account {
+    text-align: center; /* Align "Account" to the left */
+    padding-left: 0; /* Adjust padding if needed */
+  }
+  
+  .user-dropdown a:hover, .user-dropdown div:hover {
+    background-color: #f0f0f0; /* Optional hover effect */
+  }
+  
+  .user-dropdown .fa-user {
+    color: black; /* Ensure the icon is black */
+  }
+  
+  
+  
+
   
   /* Header styles */
   #header {
@@ -695,7 +878,7 @@ footer .follow i {
 }
 
 footer .install .row img {
-    border: 1px solid #088178;
+    border: 1px solid #0a0b0b;
     border-radius: 6px;
 }
 
@@ -705,7 +888,6 @@ footer .install img {
 
 footer .follow i:hover,
 footer {
-    color: #088178;
+    color: #171818;
 }
-
 
