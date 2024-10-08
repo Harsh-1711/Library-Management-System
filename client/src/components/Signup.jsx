@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../assets/css/Signup.css";
-import InputField from "./InputField"; 
-import Button from "./Button"; 
+import InputField from "./InputField";
+import Button from "./Button";
 
 function Signup() {
-  const [fullName, setFullName] = useState(""); 
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -18,7 +18,6 @@ function Signup() {
     navigate("/Login");
   };
 
-  
   const validate = () => {
     let errors = {};
 
@@ -29,24 +28,31 @@ function Signup() {
 
     if (!fullName) {
       toast.error("Full Name is required");
+      return false;
     }
 
     if (!email) {
       toast.error("Email is required");
+      return false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       toast.error("Email is invalid");
+      return false;
     }
 
     if (!password) {
       toast.error("Password is required");
+      return false;
     } else if (password.length < 6) {
       toast.error("Password must be at least 6 characters");
+      return false;
     }
 
     if (!confirmPassword) {
       toast.error("Confirm your password");
+      return false;
     } else if (password !== confirmPassword) {
       toast.error("Passwords do not match");
+      return false;
     }
 
     setErrors(errors);
@@ -55,23 +61,38 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (validate()) {
       try {
-        const response = await axios.post("http://localhost:8080/api/signup", {
-          fullName,
-          email,
-          password,
-        });
+        const response = await axios.post(
+          "http://localhost:8080/api/users/signup",
+          {
+            name: fullName,
+            email,
+            password,
+          }
+        );
+
         if (response.data.success) {
           toast.success("Signup successful");
           console.log("Signup successful:", response.data);
-          navigate("/");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         } else {
-          setErrors({ ...errors, signup: "Signup failed" });
+          toast.error(response.data.message);
         }
       } catch (error) {
         console.error("Signup error:", error);
-        setErrors({ ...errors, signin: "An error occurred while signup" });
+
+        if (error.response && error.response.data) {
+          toast.error(error.response.data.message);
+        } else {
+          setErrors({
+            ...errors,
+            signin: "An unexpected error occurred. Please try again.",
+          });
+        }
       }
     }
   };
@@ -91,7 +112,6 @@ function Signup() {
           <h4>Sign Up</h4>
           <p>Create your account to explore more.</p>
           <form onSubmit={handleSubmit}>
-            
             <InputField
               label="Full Name"
               type="text"
@@ -100,7 +120,7 @@ function Signup() {
               onChange={(e) => setFullName(e.target.value)}
               placeholder="Enter your full name"
             />
-         
+
             <InputField
               label="Email"
               type="text"
@@ -109,7 +129,7 @@ function Signup() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
             />
-           
+
             <InputField
               label="Password"
               type="password"
@@ -118,7 +138,7 @@ function Signup() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
             />
-           
+
             <InputField
               label="Confirm Password"
               type="password"
@@ -134,7 +154,6 @@ function Signup() {
                 I agree to the terms and conditions
               </label>
             </div>
-
 
             <Button type="submit" label="Sign Up" className="signup-button" />
           </form>

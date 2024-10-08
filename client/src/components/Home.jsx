@@ -142,7 +142,15 @@ const Home = () => {
         ].map((card, index) => (
           <div className="card" key={index}>
             <img src={card.src} alt={card.title} />
-            <p style={{ fontSize: "1rem", fontWeight: "bold", color: "#171b19", margin: 0, fontStyle: "italic" }}>
+            <p
+              style={{
+                fontSize: "1rem",
+                fontWeight: "bold",
+                color: "#171b19",
+                margin: 0,
+                fontStyle: "italic",
+              }}
+            >
               {card.title}
             </p>
           </div>
@@ -244,7 +252,10 @@ const Home = () => {
       <section id="newsletter" className="section-p1 section-m1">
         <div className="newstext">
           <h4>Subscribe to Our Newsletter</h4>
-          <p>Stay updated with the latest book releases, events, and <span>exclusive offers</span> from our library!</p>
+          <p>
+            Stay updated with the latest book releases, events, and{" "}
+            <span>exclusive offers</span> from our library!
+          </p>
         </div>
         <div className="form">
           <input type="text" placeholder="Your email address" />
@@ -255,9 +266,15 @@ const Home = () => {
       <footer className="section-p1">
         <div className="col">
           <h4>Contact</h4>
-          <p><strong>Address:</strong> 562 Wellington Road, Street 32, India</p>
-          <p><strong>Phone:</strong> +78098643245 / +8976543654</p>
-          <p><strong>Hours:</strong> 10:00-10:00, Mon-Sat</p>
+          <p>
+            <strong>Address:</strong> 562 Wellington Road, Street 32, India
+          </p>
+          <p>
+            <strong>Phone:</strong> +78098643245 / +8976543654
+          </p>
+          <p>
+            <strong>Hours:</strong> 10:00-10:00, Mon-Sat
+          </p>
           <div className="follow">
             <h4>Follow Us</h4>
             <div className="icon">

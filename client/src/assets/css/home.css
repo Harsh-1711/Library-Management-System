@@ -38,16 +38,17 @@ p {
     font-weight: 600;
 }
 
+
 #navbar {
     display: flex;
     align-items: center;
     list-style-type: none;
     padding: 0;
-  }
-  
- 
-  
-  
+}
+
+
+
+
 .user-icon {
     position: relative;
   
@@ -58,9 +59,9 @@ p {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .navbar {
+}
+
+.navbar {
     overflow: hidden;
    
   }
@@ -75,27 +76,26 @@ body {
     font-family: inherit;
     margin: 0;
     font-weight: 1000;
-  }
-  
-/* Styling for the heart icon */
+}
+
 .heart-icon {
     position: absolute;
-    top: 15px;  /* Adjusted to add more spacing from the image boundary */
-    left: 15px; /* Adjusted to add more spacing from the image boundary */
+    top: 15px;
+    left: 15px;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 8px;
     border-radius: 50%;
     font-size: 20px;
-    color: grey; /* Default color for unclicked heart */
+    color: grey;
     cursor: pointer;
     transition: transform 0.3s ease, color 0.3s ease;
-  }
-  
-  .heart-icon.active {
-    color: red; /* Change color when clicked */
-  }
-  
-  .heart-icon:hover {
+}
+
+.heart-icon.active {
+    color: red;
+}
+
+.heart-icon:hover {
     transform: scale(1.2);
   }
  
@@ -127,9 +127,9 @@ body {
 #navbar li:hover .user-dropdown {
     opacity: 1;
     visibility: visible;
-  }
-  
-  .user-dropdown a {
+}
+
+.user-dropdown a {
     display: block;
     padding: 5px 10px;
     text-decoration: none;
@@ -372,26 +372,23 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f8f9fa; /* Optional: Customize your header background */
-  }
-  
-  #navbar li {
+    background-color: #f8f9fa;
+}
+
+#navbar li {
     list-style: none;
     margin: 0 10px;
-  }
-  
-  #navbar li a {
+}
+
+#navbar li a {
     text-decoration: none;
     color: #000;
-  }
-  
-  #navbar li a.active {
+}
+
+#navbar li a.active {
     font-weight: bold;
     color: #007bff;
-  }
-  
-  
-    
+}
 
 .section-p1 {
     padding: 40px 80px;
@@ -420,7 +417,6 @@ button.white {
     padding: 11px 18px;
     color: #fff;
     background-color: transparent;
-    /* border-radius: 4px; */
     cursor: pointer;
     border: 1px solid #fff;
     outline: none;
@@ -430,8 +426,6 @@ button.white {
 body {
     width: 100%;
 }
-
-/* Header start */
 
 #header {
     display: flex;
@@ -444,7 +438,6 @@ body {
     position: sticky;
     top: 0;
     left: 0;
-
 }
 
 #navbar {
@@ -483,42 +476,37 @@ body {
 }
 
 header .logo {
-    width: auto; /* Adjust width to fit both icon and text */
+    width: auto;
     display: flex;
-    align-items: center; /* Ensures the icon and text are vertically aligned */
+    align-items: center;
 }
 
 .logo {
-    display: flex; /* Change to flex for proper alignment */
+    display: flex;
     align-items: center;
-    font-size: 24px; /* Size of the logo text */
-    font-weight: bold; /* Bold text */
-    color: #088178; /* Logo text color */
-    text-decoration: none; /* Remove underline */
+    font-size: 24px;
+    font-weight: bold;
+    color: #088178;
+    text-decoration: none;
 }
 
 .logo i {
-    margin-right: 10px; /* Spacing between icon and text */
-    font-size: 24px; /* Adjusted icon size to match text size */
-    color: #088178; /* Icon color */
+    margin-right: 10px;
+    font-size: 24px;
+    color: #088178;
 }
 
 .logo span {
-    margin-left: 5px; /* Slight space between icon and text */
+    margin-left: 5px;
 }
 
-/* Logo Hover Effect */
 .logo:hover {
-    color: #055f5b; /* Change color on hover */
+    color: #055f5b;
 }
 
 .logo i:hover {
-    color: #055f5b; /* Change icon color on hover */
+    color: #055f5b;
 }
-
-
-/* Home page */
-
 
 .offer-container {
     display: flex;
@@ -534,7 +522,9 @@ header .logo {
     max-width: 50%;
 }
 
-.text-content p, .text-content h1, .text-content h2 {
+.text-content p,
+.text-content h1,
+.text-content h2 {
     margin: 10px 0;
 }
 
@@ -589,81 +579,50 @@ header .logo {
 
 .slider-container {
     width: 100%;
-    height: 70vh; /* Maintain a fixed height */
+    height: 70vh;
     position: relative;
     overflow: hidden;
-    margin-top: 20px; /* Add spacing between sections */
+    margin-top: 20px;
 }
 
 .slider-container img {
     width: 100%;
-    height: 70vh; /* Fixed height to keep images uniform */
-    object-fit: cover; /* Ensure images fill space while maintaining aspect ratio */
+    height: 70vh;
+    object-fit: cover;
     transition: opacity 1s ease-in-out;
-    border-radius: 10px; /* Optional: adds rounded corners for better aesthetics */
+    border-radius: 10px;
 }
-
-  
 
 .feature-cards {
     display: flex;
-    /* Enables Flexbox */
     gap: 20px;
-    /* Space between each card */
     justify-content: center;
-    /* Centers the cards horizontally */
     padding: 20px;
-    /* Padding around the container */
     flex-wrap: wrap;
-    /* Allows wrapping to the next row if space runs out */
     background-color: #f8f4f4;
-    /* Light background color */
 }
 
 .card {
     background: #fcfdfa;
-    /* Card background color */
     border: 1px solid #dfd8d8;
-    /* Light border */
     border-radius: 8px;
-    /* Rounded corners */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow for depth */
     width: 150px;
-    /* Set width of each card */
     padding: 20px;
-    /* Padding inside each card */
     text-align: center;
-    /* Center-aligns text and images */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Smooth animation */
 }
 
 .card:hover {
     transform: translateY(-5px);
-    /* Slight lift effect on hover */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    /* Enhanced shadow on hover */
 }
 
 .card img {
     width: 80px;
-    /* Size of the images */
     height: auto;
-    /* Maintains aspect ratio */
     margin-bottom: 10px;
-    /* Space between image and title */
 }
-
-/* .title {
-    font-size: 1rem;
-    
-    font-weight: bold;
-    color: #171b19;
-    margin: 0;
-    font-size: italic;
-} */
-
 
 #product1 {
     text-align: center;
@@ -708,8 +667,8 @@ header .logo {
 
 #product1 .pro img {
     width: 100%;
-    height: 250px; /* Set a fixed height */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
+    height: 250px;
+    object-fit: cover;
     border-radius: 20px;
 }
 
@@ -740,6 +699,7 @@ header .logo {
     font-weight: 700;
     color: #088178;
 }
+
 
 #product1 .pro .cart {
     width: 40px;
@@ -772,7 +732,6 @@ header .logo {
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    /* background-image: url("../public/img/b14.png"); */
     background-repeat: no-repeat;
     background-position: 20% 30%;
     background-color: #041e42;
@@ -836,7 +795,6 @@ footer .col {
 }
 
 footer .logo {
-    /* background-image: url("../public/img/logo.jpeg"); */
     min-width: 30%;
     margin-bottom: 10px;
     min-height: 5vh;
