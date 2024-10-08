@@ -59,7 +59,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="home">
       <section id="header">
         <Link className="logo">
           <FontAwesomeIcon icon={faBook} />
