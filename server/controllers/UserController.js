@@ -36,7 +36,6 @@ const handleLogin = async (req, res) => {
       httpOnly: true,
       secure: false,
       maxAge: 48 * 60 * 60 * 1000,
-      sameSite: "Lax",
     });
     console.log("Token set in cookie:", token);
 
