@@ -16,10 +16,41 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 
 const Home = () => {
-  const [showSellerDropdown, setShowSellerDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [userName, setUserName] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
-  const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(false);
+  const [avatar, setAvatar] = useState("");
+
+  const handleNameChange = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const handleAvatarUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Open popup function
+  const openPopup = () => {
+    setShowPopup(true);
+    setShowUserDropdown(false); // Close dropdown if it's open
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
+  const handleUpdate = () => {
+    console.log("Profile updated", { userName, avatar });
+    closePopup(); // Close the popup after updating
+  };
   const [firstName, setFirstName] = useState("");
 
   const images = [
@@ -50,14 +81,8 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const toggleSellerDropdown = () => {
-    setShowSellerDropdown(true);
-    setShowUserDropdown(false);
-  };
-
   const toggleUserDropdown = () => {
     setShowUserDropdown(!showUserDropdown); // Toggle dropdown visibility
-    setShowSellerDropdown(false);
   };
   const handleLogout = async () => {
     try {
@@ -76,7 +101,6 @@ const Home = () => {
       <section id="header">
         <Link className="logo">
           <FontAwesomeIcon icon={faBook} />
-
           <span>LMS</span>
         </Link>
         <div>
@@ -107,7 +131,10 @@ const Home = () => {
               {showUserDropdown && (
                 <div className="user-dropdown">
                   <Link to="/signin">Sign In</Link>
-                  <Link to="/register">Account</Link>
+                  <div onClick={openPopup} className="account">
+                    Account
+                  </div>{" "}
+                  {/* Apply left alignment for Account */}
                   <Link to="/my-account">Favourites</Link>
                   <Link to="#" onClick={handleLogout}>
                     Sign Out
@@ -115,9 +142,73 @@ const Home = () => {
                 </div>
               )}
             </li>
+            <div style={{ textAlign: "center", marginTop: "5px" }}>
+              {avatar && (
+                <img
+                  src={avatar}
+                  alt="Avatar"
+                  style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+                />
+              )}
+              <p style={{ color: "#333", margin: "0" }}>
+                Hello, {userName || "User"}
+              </p>
+            </div>
           </ul>
         </div>
       </section>
+
+      {/* Popup Form for Profile Update */}
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <h3>Update Profile</h3>
+            <label htmlFor="avatar-upload" style={{ cursor: "pointer" }}>
+              {avatar ? (
+                <img
+                  src={avatar}
+                  alt="Avatar"
+                  style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+                />
+              ) : (
+                <div
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "50%",
+                    border: "1px dashed #ccc",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <span>Avatar</span>
+                </div>
+              )}
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarUpload}
+              id="avatar-upload"
+              style={{ display: "none" }}
+            />
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={userName}
+              onChange={handleNameChange}
+            />
+            <input type="password" placeholder="Enter new password" />
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <button onClick={closePopup} style={{ marginRight: "5px" }}>
+                Close
+              </button>
+              <button onClick={handleUpdate}>Update</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Offer Section with Slider */}
       <div className="offer-container">
@@ -130,10 +221,7 @@ const Home = () => {
           <h1>Welcome to Our Library</h1>
           <h2>Exclusive Reading Experiences</h2>
           {/* <h2>For Book Lovers & Scholars</h2> */}
-          <p className="p">
-            Get access to thousands of books and resources. <br></br>
-            Special membership discounts available!
-          </p>
+
           <button>Join Now</button>
         </div>
       </div>
@@ -186,14 +274,34 @@ const Home = () => {
                   className="heart-icon"
                   onClick={(e) => {
                     e.preventDefault();
-                    e.currentTarget.classList.toggle("active");
+                    const heartIcon = e.currentTarget;
+                    heartIcon.classList.toggle("active");
+
+                    if (heartIcon.classList.contains("active")) {
+                      alert(`${product.title} has been added to favourites!`);
+                    } else {
+                      alert(
+                        `${product.title} has been removed from favourites!`
+                      );
+                    }
                   }}
                 >
                   <FontAwesomeIcon icon={faHeart} />
                 </Link>
               </div>
               <div className="des">
-                <h5>{product.title}</h5>
+                {/* Bold the title using inline styling */}
+                <h5
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                    color: "#171b19",
+                    margin: 0,
+                    fontStyle: "italic",
+                  }}
+                >
+                  {product.title}
+                </h5>
               </div>
             </div>
           ))}
@@ -222,16 +330,34 @@ const Home = () => {
                   className="heart-icon"
                   onClick={(e) => {
                     e.preventDefault();
-                    e.currentTarget.classList.toggle("active");
+                    const heartIcon = e.currentTarget;
+                    heartIcon.classList.toggle("active");
+
+                    if (heartIcon.classList.contains("active")) {
+                      alert(`${product.title} has been added to favourites!`);
+                    } else {
+                      alert(
+                        `${product.title} has been removed from favourites!`
+                      );
+                    }
                   }}
                 >
                   <FontAwesomeIcon icon={faHeart} />
-                  {/* <i className="fas fa-heart"></i> */}
                 </Link>
               </div>
               <div className="des">
-                <h5>{product.title}</h5>
-                <h4>{product.price}</h4>
+                {/* Bold the title using inline styling */}
+                <h5
+                  style={{
+                    fontSize: "1rem",
+                    fontWeight: "bold",
+                    color: "#171b19",
+                    margin: 0,
+                    fontStyle: "italic",
+                  }}
+                >
+                  {product.title}
+                </h5>
               </div>
             </div>
           ))}
@@ -288,8 +414,8 @@ const Home = () => {
           <h4>My Account</h4>
           <a href="#">Sign In</a>
           <a href="#">View Borrowed Books</a>
-          <a href="#">My Wishlist</a>
-          <a href="#">Track My Order</a>
+          {/* <a href="#">My Wishlist</a> */}
+          {/* <a href="#">Track My Order</a> */}
           <a href="#">Help</a>
         </div>
         <div className="col install">
