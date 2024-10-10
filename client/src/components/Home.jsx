@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+// import Cookies from "js-cookie";
 import "../assets/css/home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook, faHeart, faStore } from "@fortawesome/free-solid-svg-icons";
@@ -13,12 +13,14 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
 
 const Home = () => {
   const [showSellerDropdown, setShowSellerDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState("");
 
   const images = [
     "/src/assets/img/slider2.jpg",
@@ -27,11 +29,11 @@ const Home = () => {
   ];
   useEffect(() => {
     const handleAuthorization = () => {
-      console.log("Function calling");
       axios
         .get("/api/auth", { withCredentials: true })
         .then((res) => {
-          console.log(res.data);
+          const user = res.data.user;
+          setFirstName(user.name.split(" ")[0]);
         })
         .catch((err) => {
           navigate("/login");
@@ -57,9 +59,20 @@ const Home = () => {
     setShowUserDropdown(!showUserDropdown); // Toggle dropdown visibility
     setShowSellerDropdown(false);
   };
+  const handleLogout = async () => {
+    try {
+      await axios.get("/api/logout", { withCredentials: true });
+      toast.success("Logged out successfully!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      toast.error("Error during logout: " + error.message);
+    }
+  };
 
   return (
-    <div>
+    <div className="home">
       <section id="header">
         <Link className="logo">
           <FontAwesomeIcon icon={faBook} />
@@ -90,12 +103,15 @@ const Home = () => {
               onMouseLeave={() => setShowUserDropdown(false)}
             >
               <FontAwesomeIcon icon={faUser} />
+              Hi, {firstName}
               {showUserDropdown && (
                 <div className="user-dropdown">
                   <Link to="/signin">Sign In</Link>
                   <Link to="/register">Account</Link>
                   <Link to="/my-account">Favourites</Link>
-                  <Link to="/orders">Sign Out</Link>
+                  <Link to="#" onClick={handleLogout}>
+                    Sign Out
+                  </Link>
                 </div>
               )}
             </li>
@@ -114,7 +130,7 @@ const Home = () => {
           <h1>Welcome to Our Library</h1>
           <h2>Exclusive Reading Experiences</h2>
           {/* <h2>For Book Lovers & Scholars</h2> */}
-          <p>
+          <p className="p">
             Get access to thousands of books and resources. <br></br>
             Special membership discounts available!
           </p>
@@ -226,7 +242,7 @@ const Home = () => {
       <section id="newsletter" className="section-p1 section-m1">
         <div className="newstext">
           <h4>Subscribe to Our Newsletter</h4>
-          <p>
+          <p className="p">
             Stay updated with the latest book releases, events, and{" "}
             <span>exclusive offers</span> from our library!
           </p>
@@ -240,13 +256,13 @@ const Home = () => {
       <footer className="section-p1">
         <div className="col">
           <h4>Contact</h4>
-          <p>
+          <p className="p">
             <strong>Address:</strong> 562 Wellington Road, Street 32, India
           </p>
-          <p>
+          <p className="p">
             <strong>Phone:</strong> +78098643245 / +8976543654
           </p>
-          <p>
+          <p className="p">
             <strong>Hours:</strong> 10:00-10:00, Mon-Sat
           </p>
           <div className="follow">
@@ -278,12 +294,12 @@ const Home = () => {
         </div>
         <div className="col install">
           <h4>Install App</h4>
-          <p>From App Store or Google Play</p>
+          <p className="p">From App Store or Google Play</p>
           <div className="row">
             <img src="/src/assets/img/app.jpg" alt="App Store" />
             <img src="/src/assets/img/play.jpg" alt="Google Play" />
           </div>
-          <p>Secured Payment Gateways</p>
+          <p className="p">Secured Payment Gateways</p>
           <img src="/src/assets/img/pay.png" alt="Payment Gateways" />
         </div>
       </footer>

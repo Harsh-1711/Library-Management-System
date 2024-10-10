@@ -5,15 +5,12 @@ import toast from "react-hot-toast";
 import "../assets/css/Login.css";
 import InputField from "./InputField";
 import Button from "./Button";
-import Cookies from "js-cookie";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const token = Cookies.get("token");
-  console.log(token);
   const handleRegisterClick = () => {
     navigate("/Signup");
   };
@@ -98,50 +95,55 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-form-container">
-        <div className="login-image">
-          <h2>"Learning never exhausts the mind."</h2>
-          <p> — Leonardo da Vinci</p>
-        </div>
-        <div className="login-form">
-          <h3>Empower Your Mind</h3>
-          <h4>Login</h4>
-          <p>Welcome Back! Let's pick up where you left off.</p>
-          <form onSubmit={handleSubmit}>
-            <InputField
-              label="Email"
-              type="text"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-            />
+    <div className="login">
+      <div className="login-container">
+        <div className="login-form-container">
+          <div className="login-image">
+            <h2>"Learning never exhausts the mind."</h2>
+            <p> — Leonardo da Vinci</p>
+          </div>
+          <div className="login-form">
+            <h3>Empower Your Mind</h3>
+            <h4>Login</h4>
+            <p>Welcome Back! Let's pick up where you left off.</p>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                />
+              </div>
 
-            <InputField
-              label="Password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-            />
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                />
+              </div>
+              <div className="checkbox-group">
+                <input type="checkbox" id="rememberMe" />
+                <label htmlFor="rememberMe">Remember me</label>
+              </div>
 
-            <div className="checkbox-group">
-              <input type="checkbox" id="rememberMe" />
-              <label htmlFor="rememberMe">Remember me</label>
-            </div>
+              <Button type="submit" label="Log in" className="login-button" />
 
-            <Button type="submit" label="Log in" className="login-button" />
-
-            <Button
-              type="button"
-              label="Register"
-              className="register-button"
-              onClick={handleRegisterClick}
-            />
-          </form>
-          <Link to="/forgot">Forgot Password?</Link>
+              <Button
+                type="button"
+                label="Register"
+                className="register-button"
+                onClick={handleRegisterClick}
+              />
+            </form>
+            <Link to="/forgot">Forgot Password?</Link>
+          </div>
         </div>
       </div>
     </div>

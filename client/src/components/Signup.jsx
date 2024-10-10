@@ -98,74 +98,85 @@ function Signup() {
   };
 
   return (
-    <div className="signup-container">
-      <div className="signup-form-container">
-        <div className="signup-image">
-          <h2>
-            "The only person who is educated is the one who has learned how to
-            learn...and change."
-          </h2>
-          <p>— Carl Rogers</p>
-        </div>
-        <div className="signup-form">
-          <h3>Get Started with Your Account</h3>
-          <h4>Sign Up</h4>
-          <p>Create your account to explore more.</p>
-          <form onSubmit={handleSubmit}>
-            <InputField
-              label="Full Name"
-              type="text"
-              id="fullName"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="Enter your full name"
-            />
+    <div className="signup">
+      <div className="signup-container">
+        <div className="signup-form-container">
+          <div className="signup-image">
+            <h2>
+              "The only person who is educated is the one who has learned how to
+              learn...and change."
+            </h2>
+            <p>— Carl Rogers</p>
+          </div>
+          <div className="signup-form">
+            <h3>Get Started with Your Account</h3>
+            <h4>Sign Up</h4>
+            <p>Create your account to explore more.</p>
+            <form onSubmit={handleSubmit}>
+              <div className="signup-form-group">
+                <InputField
+                  label="Full Name"
+                  type="text"
+                  id="fullName"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="Enter your full name"
+                />
+              </div>
 
-            <InputField
-              label="Email"
-              type="text"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-            />
+              <div className="signup-form-group">
+                <InputField
+                  label="Email"
+                  type="text"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                />
+              </div>
 
-            <InputField
-              label="Password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-            />
+              <div className="signup-form-group">
+                <InputField
+                  label="Password"
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                />
+              </div>
 
-            <InputField
-              label="Confirm Password"
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm your password"
-            />
+              <div className="signup-form-group">
+                <InputField
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm your password"
+                />
+              </div>
 
-            <div className="signup-checkbox-group">
-              <input type="checkbox" id="agreeTerms" />
-              <label htmlFor="agreeTerms">
-                I agree to the terms and conditions
-              </label>
-            </div>
+              <div className="signup-checkbox-group">
+                <input type="checkbox" id="agreeTerms" />
+                <label htmlFor="agreeTerms">
+                  I agree to the terms and conditions
+                </label>
+              </div>
 
-            <Button type="submit" label="Sign Up" className="signup-button" />
-          </form>
-          <p>
-            Already have an account?{" "}
-            <Button
-              type="button"
-              label="Log In"
-              className="log-link"
-              onClick={handleLoginClick}
-            />
-          </p>
+              <Button type="submit" label="Sign Up" className="signup-button" />
+            </form>
+
+            <p>
+              Already have an account?{" "}
+              <Button
+                type="button"
+                label="Log In"
+                className="log-link"
+                onClick={handleLoginClick}
+              />
+            </p>
+          </div>
         </div>
       </div>
     </div>
