@@ -1,0 +1,59 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    background-color: #1c1c1c;
+    border-bottom: 1px solid #333;
+  }
+  
+  .navbar-left h1 {
+    color: #00bfa5;
+  }
+  
+  .menu-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+  }
+  
+  .search-input {
+    background-color: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    color: #fff;
+  }
+  
+  .search-icon {
+    margin-left: -30px;
+    color: #fff;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    font-size: 24px;
+    margin-right: 20px;
+    color: #00bfa5;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-icon {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .profile-name {
+    color: #fff;
+  }
+  
