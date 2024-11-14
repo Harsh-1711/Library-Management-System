@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
 const { findUserByEmail } = require("../repositories/userRepository");
 const { createUser, loginUser } = require("../services/userService");
+const UserSchema = require("../models/UserSchema");
+const cloudinary = require("cloudinary").v2;
+const bcrypt = require("bcrypt");
 
 const handleSignup = async (req, res) => {
   const { name, email, password } = req.body;
@@ -57,4 +60,63 @@ const handleLogin = async (req, res) => {
   }
 };
 
-module.exports = { handleSignup, handleLogin };
+const handleUpdate = async (req, res) => {
+  try {
+    let { name, password, img } = req.body;
+    console.log("Body: ", req.body);
+    const user = req.user;
+
+    let updateFields = {}; // Initialize an object to store updated fields
+
+    // Update name if provided
+    if (name) {
+      updateFields.name = name;
+    }
+
+    // Update password if provided
+    if (password) {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(password, salt);
+      updateFields.password = hashedPassword;
+    }
+
+    // Update avatar if provided
+    console.log("Local Image: ", img);
+    if (img) {
+      if (user.avatar) {
+        await cloudinary.uploader.destroy(
+          user.avatar.split("/").pop().split(".")[0]
+        );
+      }
+      const uploadedResponse = await cloudinary.uploader.upload(img);
+      console.log(uploadedResponse);
+      updateFields.avatar = uploadedResponse.secure_url;
+    }
+
+    console.log("Avatar: ", updateFields.avatar);
+
+    // Update user in the database
+    let updatedUser = await UserSchema.findByIdAndUpdate(
+      user._id,
+      updateFields,
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await updatedUser.save();
+
+    res
+      .status(200)
+      .json({ message: "User updated successfully", user: updatedUser });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the user" });
+  }
+};
+
+module.exports = { handleSignup, handleLogin, handleUpdate };

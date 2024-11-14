@@ -7,9 +7,10 @@ async function authenticateToken(req, res, next) {
 
   try {
     const decodedUser = jwt.verify(token, process.env.JWT_SECRET);
-    req.token = token;
-    req.user = await User.findById(decodedUser.id);
-    if (!req.user) return res.status(404).json({ error: "User not found" });
+    const user = await User.findById(decodedUser.id).select("-password");
+
+    req.user = user;
+
     next();
   } catch (error) {
     console.error("Authentication error:", error);

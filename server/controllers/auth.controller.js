@@ -6,10 +6,9 @@ const authorizeUser = (req, res) => {
   if (!token) return res.status(401).json({ error: "Unauthorized" });
 
   try {
-    const { id, email, name, favourites } = req.user;
-    return res
-      .status(200)
-      .json({ msg: "Authorized", user: { id, email, name, favourites } });
+    const user = req.user;
+    console.log("Auth User: ", user);
+    return res.status(200).json({ msg: "Authorized", user: user });
   } catch (error) {
     res.clearCookie("token");
     console.log("JWT Error:", error);
