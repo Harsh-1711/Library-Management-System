@@ -77,6 +77,7 @@ const Home = () => {
     }
 
     closePopup();
+    window.location.reload();
   };
   const [firstName, setFirstName] = useState("");
 
