@@ -17,9 +17,11 @@ import toast from "react-hot-toast";
 const Home = () => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const [avatar, setAvatar] = useState("");
+  let file;
   const navigate = useNavigate();
 
   const handleNameChange = (e) => {
@@ -27,44 +29,68 @@ const Home = () => {
   };
 
   const handleAvatarUpload = (e) => {
-    const file = e.target.files[0];
+    file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
+
       reader.onloadend = () => {
         setAvatar(reader.result);
       };
+
       reader.readAsDataURL(file);
+    } else {
+      showToast("Invalid file type", " Please select an image file", "error");
+      setAvatar(null);
     }
   };
 
-  // Open popup function
   const openPopup = () => {
     setShowPopup(true);
-    setShowUserDropdown(false); // Close dropdown if it's open
+    setShowUserDropdown(false);
   };
 
   const closePopup = () => {
     setShowPopup(false);
   };
 
-  const handleUpdate = () => {
-    console.log("Profile updated", { userName, avatar });
-    closePopup(); // Close the popup after updating
+  const handleUpdate = async () => {
+    // console.log("User: ", avatar);
+    const res = await axios.post(
+      "/api/users/updateProfile",
+      {
+        name: userName,
+        password,
+        img: avatar,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("Updated User: ", res.data);
+    if (res.data.user) {
+      setUserName(res.data.user.name);
+      setAvatar(res.data.user.avatar);
+      toast.success(res.data.message);
+    }
+
+    closePopup();
   };
   const [firstName, setFirstName] = useState("");
 
-  const images = [
-    "/src/assets/img/slider2.jpg",
-    "/src/assets/img/slider3.jpg",
-    // '/img/slider4.jpg'
-  ];
+  const images = ["/src/assets/img/slider2.jpg", "/src/assets/img/slider3.jpg"];
+
   useEffect(() => {
     const handleAuthorization = () => {
       axios
         .get("/api/auth", { withCredentials: true })
         .then((res) => {
           const user = res.data.user;
-          setFirstName(user.name.split(" ")[0]);
+          setUserName(user.name.split(" ")[0]);
+          console.log("User Avatar: ", user);
+          setAvatar(user.avatar);
         })
         .catch((err) => {
           navigate("/login");
@@ -82,7 +108,7 @@ const Home = () => {
   }, [images.length]);
 
   const toggleUserDropdown = () => {
-    setShowUserDropdown(!showUserDropdown); // Toggle dropdown visibility
+    setShowUserDropdown(!showUserDropdown);
   };
   const handleLogout = async () => {
     try {
@@ -126,15 +152,28 @@ const Home = () => {
               onMouseEnter={toggleUserDropdown}
               onMouseLeave={() => setShowUserDropdown(false)}
             >
-              <FontAwesomeIcon icon={faUser} />
-              Hi, {firstName}
+              <div style={{ textAlign: "center", marginTop: "5px" }}>
+                {avatar && (
+                  <img
+                    src={avatar}
+                    alt="Avatar"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                )}
+              </div>
+              <p style={{ color: "black", fontSize: "1.1rem" }}>
+                Hi, {userName}
+              </p>
               {showUserDropdown && (
                 <div className="user-dropdown">
                   <Link to="/signin">Sign In</Link>
                   <div onClick={openPopup} className="account">
                     Account
                   </div>{" "}
-                  {/* Apply left alignment for Account */}
                   <Link to="/my-account">Favourites</Link>
                   <Link to="#" onClick={handleLogout}>
                     Sign Out
@@ -142,18 +181,6 @@ const Home = () => {
                 </div>
               )}
             </li>
-            <div style={{ textAlign: "center", marginTop: "5px" }}>
-              {avatar && (
-                <img
-                  src={avatar}
-                  alt="Avatar"
-                  style={{ width: "30px", height: "30px", borderRadius: "50%" }}
-                />
-              )}
-              <p style={{ color: "#333", margin: "0" }}>
-                Hello, {userName || "User"}
-              </p>
-            </div>
           </ul>
         </div>
       </section>
@@ -199,7 +226,13 @@ const Home = () => {
               value={userName}
               onChange={handleNameChange}
             />
-            <input type="password" placeholder="Enter new password" />
+            <input
+              type="password"
+              placeholder="Enter new password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <button onClick={closePopup} style={{ marginRight: "5px" }}>
                 Close
@@ -363,6 +396,7 @@ const Home = () => {
           ))}
         </div>
       </section>
+      {/* <NewArivals/> */}
 
       {/* Newsletter Section */}
       <section id="newsletter" className="section-p1 section-m1">
