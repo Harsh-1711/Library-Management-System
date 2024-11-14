@@ -60,7 +60,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <section id="header">
+      <section id="header"style={{ backgroundColor: 'white' }}>
         <Link className="logo">
           <FontAwesomeIcon icon={faBook} />
           <span>LMS</span>
@@ -68,7 +68,7 @@ const Home = () => {
         <div>
           <ul id="navbar">
             <li><Link className="active" to="/">Home</Link></li>
-            <li><Link to="/About">About</Link></li>
+            <li><Link to="/Abt">About</Link></li>
             <li><Link to="/Contact">Contact</Link></li>
             <li onMouseEnter={toggleUserDropdown} onMouseLeave={() => setShowUserDropdown(false)} style={{ position: 'relative' }}>
             <FontAwesomeIcon icon={faUser} style={{ color: 'black' }} />
@@ -123,7 +123,7 @@ const Home = () => {
        <div className="offer-container">
         <img className="offer-slider" src={images[currentSlide]} alt="Offer Slide" />
         <div className="text-content">
-          <h1>Welcome to Our Library</h1>
+          <h1>Welcome to Our Library:)</h1>
           <h2>Exclusive Reading Experiences</h2>
           {/* <h2>For Book Lovers & Scholars</h2> */}
        
@@ -276,14 +276,14 @@ const Home = () => {
             <strong>Hours:</strong> 10:00-10:00, Mon-Sat
           </p>
           <div className="follow">
-            <h4>Follow Us</h4>
-            <div className="icon">
+            {/* <h4>Follow Us</h4> */}
+            {/* <div className="icon">
               <FaFacebookF />
               <FaTwitter />
               <FaInstagram />
               <FaPinterestP />
               <FaYoutube />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="col">
