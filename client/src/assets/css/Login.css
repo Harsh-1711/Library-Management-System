@@ -1,159 +1,163 @@
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: white;
-  padding: 20px;
-}
+.login {
 
-.login-form-container {
-  display: flex;
-  flex-direction: row;
-  /* Default layout for larger screens */
-  height: auto;
-  max-width: 900px;
-  width: 100%;
-  background-color: #fff;
-  border-radius: 50px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.login-image {
-  flex: 1;
-  background-image: url('../img/logimg.webp');
-  background-size: cover;
-  background-position: center;
-  padding: 40px;
-  color: #fff;
-}
-
-.login-image h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.login-image p {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.login-form {
-  flex: 1;
-  padding: 40px;
-}
-
-.login-form h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.login-form h4 {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 10px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.checkbox-group {
-  display: inline;
-}
-
-.checkbox-group input {
-  margin-right: 2px;
-}
-
-.error {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.login-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.register-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #ddd;
-  color: #000;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-
-@media screen and (max-width: 768px) {
   .login-container {
-    flex-direction: column; 
-    padding: 15px; 
-    height: auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: white;
+    padding: 20px;
   }
 
-  
   .login-form-container {
-    flex-direction: column;
-    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    /* Default layout for larger screens */
+    height: 70vh;
+    max-width: 900px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 
   .login-image {
-    padding: 20px;
-    text-align: center;
+    flex: 1;
+    background-image: url('../img/logimg.webp');
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    color: #fff;
+  }
+
+  .login-image h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .login-image p {
+    font-size: 16px;
+    margin-bottom: 20px;
   }
 
   .login-form {
-    padding: 20px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .login-image {
-    display: none;
-  }
-
-  .login-form {
-    padding: 20px;
+    flex: 1;
+    padding: 40px;
   }
 
   .login-form h3 {
-    font-size: 20px;
+    font-size: 24px;
+    margin-bottom: 10px;
   }
 
   .login-form h4 {
-    font-size: 16px;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
   }
 
   .form-group input {
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
   }
 
-  .login-button,
+  .checkbox-group {
+    display: inline;
+  }
+
+  .checkbox-group input {
+    margin-right: 2px;
+  }
+
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
   .register-button {
-    padding: 8px;
+    width: 100%;
+    padding: 10px;
+    background-color: #ddd;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .login-container {
+      flex-direction: column;
+      padding: 15px;
+      height: auto;
+    }
+
+
+    .login-form-container {
+      flex-direction: column;
+      border-radius: 20px;
+    }
+
+    .login-image {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .login-form {
+      padding: 20px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .login-image {
+      display: none;
+    }
+
+    .login-form {
+      padding: 20px;
+    }
+
+    .login-form h3 {
+      font-size: 20px;
+    }
+
+    .login-form h4 {
+      font-size: 16px;
+    }
+
+    .form-group input {
+      padding: 8px;
+    }
+
+    .login-button,
+    .register-button {
+      padding: 8px;
+    }
   }
 }

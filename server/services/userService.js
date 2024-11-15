@@ -8,7 +8,6 @@ const createUser = async (userData) => {
 };
 
 const loginUser = async (email, password) => {
-  // console.log("I m in services");
   const user = await findUserByEmail(email);
 
   if (!user) {

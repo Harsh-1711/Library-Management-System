@@ -6,12 +6,27 @@ const authorizeUser = (req, res) => {
   if (!token) return res.status(401).json({ error: "Unauthorized" });
 
   try {
-    const user = jwt.verify(token, process.env.JWT_SECRET);
-    return res.status(200).json({ msg: "Authorized", user });
+    const user = req.user;
+    console.log("Auth User: ", user);
+    return res.status(200).json({ msg: "Authorized", user: user });
   } catch (error) {
+    res.clearCookie("token");
     console.log("JWT Error:", error);
     return res.status(401).json({ error: "Unauthorized" });
   }
 };
 
-module.exports = { authorizeUser };
+const logoutUser = async (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      path: "/",
+    });
+    return res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.error("Logout error:", error);
+    return res.status(500).json({ error: "Failed to log out" });
+  }
+};
+
+module.exports = { authorizeUser, logoutUser };
