@@ -88,7 +88,9 @@ const handleUpdate = async (req, res) => {
           user.avatar.split("/").pop().split(".")[0]
         );
       }
-      const uploadedResponse = await cloudinary.uploader.upload(img);
+      const uploadedResponse = await cloudinary.uploader.upload(img, {
+        folder: "Avatars",
+      });
       console.log(uploadedResponse);
       updateFields.avatar = uploadedResponse.secure_url;
     }

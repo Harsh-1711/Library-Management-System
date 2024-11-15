@@ -16,8 +16,6 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default:
-        "https://res.cloudinary.com/minor-project/image/upload/v1728720696/default_avatar_cupclu.png",
     },
     role: {
       type: String,
