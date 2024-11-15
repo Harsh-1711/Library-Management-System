@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast"; 
 import "../assets/css/Login.css";
@@ -10,12 +10,26 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-
   const handleRegisterClick = () => {
     navigate("/Signup");
   };
 
-  
+  useEffect(() => {
+    const handleAuthorization = () => {
+      axios
+        .get("/api/auth")
+        .then((res) => {
+          navigate("/");
+          console.log(res.data);
+        })
+        .catch((err) => {
+          navigate("/login");
+          console.log(err);
+        });
+    };
+    handleAuthorization();
+  }, []);
+
   const validate = () => {
     let errors = {};
 
