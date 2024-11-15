@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faUsers, faClock, faGraduationCap, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBook,
+  faUsers,
+  faClock,
+  faGraduationCap,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import {
   FaFacebookF,
   FaTwitter,
   FaInstagram,
   FaPinterestP,
-  FaYoutube
-} from 'react-icons/fa';
+  FaYoutube,
+} from "react-icons/fa";
 import "../assets/css/abt.css";
 import "../assets/css/home.css";
 
@@ -47,22 +53,30 @@ const About = () => {
   return (
     <div className="about-page">
       {/* Header Section */}
-      <section id="header" style={{ backgroundColor: 'white' }}>
+      <section id="header" style={{ backgroundColor: "white" }}>
         <Link className="logo" to="/">
           <FontAwesomeIcon icon={faBook} />
           <span>LMS</span>
         </Link>
         <div>
           <ul id="navbar">
-            <li><Link to="/Home">Home</Link></li>
-            <li><Link className="active" to="/abt">About</Link></li>
-            <li><Link to="/Contact">Contact</Link></li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link className="active" to="/about">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/Contact">Contact</Link>
+            </li>
             <li
               onMouseEnter={toggleUserDropdown}
               onMouseLeave={() => setShowUserDropdown(false)}
-              style={{ position: 'relative' }}
+              style={{ position: "relative" }}
             >
-              <FontAwesomeIcon icon={faUser} style={{ color: 'black' }} />
+              <FontAwesomeIcon icon={faUser} style={{ color: "black" }} />
               {showUserDropdown && (
                 <div className="user-dropdown">
                   {/* <Link to="/signin">Sign In</Link>
@@ -83,21 +97,42 @@ const About = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <motion.div className="hero-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} />
+        <motion.div
+          className="hero-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        />
         <div className="hero-content">
-          <motion.div initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.5 }}>
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
             <h1>About Our Library</h1>
-            <p>Empowering minds through knowledge, innovation, and community engagement since 1995.</p>
+            <p>
+              Empowering minds through knowledge, innovation, and community
+              engagement since 1995.
+            </p>
             <button className="explore-btn">Explore More</button>
           </motion.div>
         </div>
       </motion.section>
 
       {/* Stats Section */}
-      <motion.section className="stats-section" variants={containerVariants} initial="hidden" animate="visible">
+      <motion.section
+        className="stats-section"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="stats-container">
           {statsData.map((stat, index) => (
-            <motion.div key={index} variants={itemVariants} className="stat-card">
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="stat-card"
+            >
               <FontAwesomeIcon icon={stat.icon} className="stat-icon" />
               <h3>{stat.count}</h3>
               <p>{stat.label}</p>
@@ -106,78 +141,116 @@ const About = () => {
         </div>
       </motion.section>
 
-    {/* Mission Section */}
-<motion.section 
-  className="vision-mission-section" 
-  initial={{ opacity: 0 }} 
-  whileInView={{ opacity: 1 }} 
-  transition={{ duration: 0.8 }} 
-  viewport={{ once: true }}>
-  
-  <div className="tab-content">
-    <motion.h2 
-      className="mission-title" 
-      initial={{ y: 20, opacity: 0 }} 
-      whileInView={{ y: 0, opacity: 1 }} 
-      transition={{ delay: 0.2 }} 
-      viewport={{ once: true }}>
-      Our Mission
-    </motion.h2>
+      {/* Mission Section */}
+      <motion.section
+        className="vision-mission-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <div className="tab-content">
+          <motion.h2
+            className="mission-title"
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Our Mission
+          </motion.h2>
 
-    <motion.p 
-      className="mission-description" 
-      initial={{ y: 20, opacity: 0 }} 
-      whileInView={{ y: 0, opacity: 1 }} 
-      transition={{ delay: 0.4 }} 
-      viewport={{ once: true }}>
-      We strive to be the leading resource for intellectual discovery, providing innovative services and technology, exceptional collections, and spaces for engaging and transforming lives through knowledge.
-    </motion.p>
+          <motion.p
+            className="mission-description"
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            We strive to be the leading resource for intellectual discovery,
+            providing innovative services and technology, exceptional
+            collections, and spaces for engaging and transforming lives through
+            knowledge.
+          </motion.p>
 
-    {/* Animated Headline */}
-    <motion.h3 
-      className="news-headline" 
-      initial={{ x: -200, opacity: 0 }} 
-      whileInView={{ x: 0, opacity: 1 }} 
-      transition={{ type: "spring", stiffness: 100, delay: 0.6 }} 
-      viewport={{ once: true }}>
-      Discover. Engage. Transform.
-    </motion.h3>
-  </div>
-</motion.section>
-
+          {/* Animated Headline */}
+          <motion.h3
+            className="news-headline"
+            initial={{ x: -200, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 100, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Discover. Engage. Transform.
+          </motion.h3>
+        </div>
+      </motion.section>
 
       {/* Features Section */}
-      <motion.section 
-  className="timeline-section" 
-  variants={containerVariants} 
-  initial="hidden" 
-  whileInView="visible" 
-  viewport={{ once: true }}>
-  
-  <div className="timeline">
-    {[
-      { title: "Modern Facilities", description: "State-of-the-art study rooms, computer labs, and multimedia resources." },
-      { title: "Expert Staff", description: "Dedicated librarians and staff members ready to assist you with research and resources." },
-      { title: "Digital Access", description: "24/7 access to our extensive collection of e-books, journals, and online databases." },
-    ].map((feature, index) => (
-      <motion.div key={index} variants={itemVariants} className="timeline-item">
-        <div className="timeline-content">
-          <h3>{feature.title}</h3>
-          <p>{feature.description}</p>
+      <motion.section
+        className="timeline-section"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="timeline">
+          {[
+            {
+              title: "Modern Facilities",
+              description:
+                "State-of-the-art study rooms, computer labs, and multimedia resources.",
+            },
+            {
+              title: "Expert Staff",
+              description:
+                "Dedicated librarians and staff members ready to assist you with research and resources.",
+            },
+            {
+              title: "Digital Access",
+              description:
+                "24/7 access to our extensive collection of e-books, journals, and online databases.",
+            },
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="timeline-item"
+            >
+              <div className="timeline-content">
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-    ))}
-  </div>
-</motion.section>
-
-
+      </motion.section>
 
       {/* CTA Section */}
-      <motion.section className="cta-section" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-        <motion.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }} viewport={{ once: true }}>
+      <motion.section
+        className="cta-section"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+      >
+        <motion.h2
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          viewport={{ once: true }}
+        >
           Join Our Community Today
         </motion.h2>
-        <motion.button className="cta-button" initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4 }} viewport={{ once: true }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.button
+          className="cta-button"
+          initial={{ scale: 0.9, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
           Become a Member
         </motion.button>
       </motion.section>
@@ -186,9 +259,15 @@ const About = () => {
       <footer className="section-p1">
         <div className="col">
           <h4>Contact</h4>
-          <p><strong>Address:</strong> 562 Wellington Road, Street 32, India</p>
-          <p><strong>Phone:</strong> +78098643245 / +8976543654</p>
-          <p><strong>Hours:</strong> 10:00-10:00, Mon-Sat</p>
+          <p>
+            <strong>Address:</strong> 562 Wellington Road, Street 32, India
+          </p>
+          <p>
+            <strong>Phone:</strong> +78098643245 / +8976543654
+          </p>
+          <p>
+            <strong>Hours:</strong> 10:00-10:00, Mon-Sat
+          </p>
           <div className="follow">
             {/* <h4>Follow Us</h4>
             <div className="icon">
@@ -230,4 +309,4 @@ const About = () => {
 };
 
 export default About;
-``
+``;

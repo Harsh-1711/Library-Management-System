@@ -23,6 +23,8 @@ const Home = () => {
   const [avatar, setAvatar] = useState("");
   let file;
   const navigate = useNavigate();
+  const defaultAvatar =
+    "https://res.cloudinary.com/minor-project/image/upload/v1731654563/Minor%20Project/pcgphikpnjuwdtnephds.png";
 
   const handleNameChange = (e) => {
     setUserName(e.target.value);
@@ -39,7 +41,7 @@ const Home = () => {
 
       reader.readAsDataURL(file);
     } else {
-      showToast("Invalid file type", " Please select an image file", "error");
+      toast.error("Invalid file type", " Please select an image file", "error");
       setAvatar(null);
     }
   };
@@ -60,7 +62,7 @@ const Home = () => {
       {
         name: userName,
         password,
-        img: avatar,
+        img: avatar || defaultAvatar,
       },
       {
         withCredentials: true,
@@ -72,12 +74,14 @@ const Home = () => {
     console.log("Updated User: ", res.data);
     if (res.data.user) {
       setUserName(res.data.user.name);
-      setAvatar(res.data.user.avatar);
-      toast.success(res.data.message);
+      setAvatar(res.data.user.avatar || defaultAvatar);
     }
 
     closePopup();
-    window.location.reload();
+    setTimeout(() => {
+      toast.success(res.data.message);
+    }, 2000);
+    // window.location.reload();
   };
   const [firstName, setFirstName] = useState("");
 
@@ -91,7 +95,7 @@ const Home = () => {
           const user = res.data.user;
           setUserName(user.name.split(" ")[0]);
           console.log("User Avatar: ", user);
-          setAvatar(user.avatar);
+          setAvatar(user.avatar || defaultAvatar);
         })
         .catch((err) => {
           navigate("/login");
@@ -125,7 +129,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <section id="header"style={{ backgroundColor: 'white' }}>
+      <section id="header" style={{ backgroundColor: "white" }}>
         <Link className="logo">
           <FontAwesomeIcon icon={faBook} />
           <span>LMS</span>
@@ -143,39 +147,36 @@ const Home = () => {
             <li>
               <Link to="/Contact">Contact</Link>
             </li>
-            <li>
-              <Link to="/Cart">
-                <FontAwesomeIcon icon={faStore} />
-                <span style={{ marginLeft: "5px" }}></span>
-              </Link>
-            </li>
+
             <li
               onMouseEnter={toggleUserDropdown}
               onMouseLeave={() => setShowUserDropdown(false)}
             >
-              <div style={{ textAlign: "center", marginTop: "5px" }}>
+              <div style={{ textAlign: "center", marginTop: "0" }}>
                 {avatar && (
                   <img
-                    src={avatar}
+                    src={avatar || defaultAvatar}
                     alt="Avatar"
                     style={{
-                      width: "30px",
-                      height: "30px",
+                      width: "25px",
+                      height: "25px",
                       borderRadius: "50%",
+                      marginTop: "-20px",
+                      marginRight: "10px",
                     }}
                   />
                 )}
               </div>
-              <p style={{ color: "black", fontSize: "1.1rem" }}>
+              <p style={{ color: "black", fontSize: "1.1rem", marginTop: "0" }}>
                 Hi, {userName}
               </p>
               {showUserDropdown && (
                 <div className="user-dropdown">
-                  <Link to="/signin">Sign In</Link>
+                  {!userName && <Link to="/login">Sign In</Link>}{" "}
                   <div onClick={openPopup} className="account">
                     Account
                   </div>{" "}
-                  <Link to="/my-account">Favourites</Link>
+                  <Link to="#">Favourites</Link>
                   <Link to="#" onClick={handleLogout}>
                     Sign Out
                   </Link>
@@ -194,7 +195,7 @@ const Home = () => {
             <label htmlFor="avatar-upload" style={{ cursor: "pointer" }}>
               {avatar ? (
                 <img
-                  src={avatar}
+                  src={avatar || defaultAvatar}
                   alt="Avatar"
                   style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                 />
