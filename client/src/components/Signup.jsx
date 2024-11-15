@@ -53,26 +53,12 @@ function Signup() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      try {
-        const response = await axios.post("http://localhost:8080/api/signup", {
-          fullName,
-          email,
-          password,
-        });
-        if (response.data.success) {
-          toast.success("Signup successful");
-          console.log("Signup successful:", response.data);
-          navigate("/");
-        } else {
-          setErrors({ ...errors, signup: "Signup failed" });
-        }
-      } catch (error) {
-        console.error("Signup error:", error);
-        setErrors({ ...errors, signin: "An error occurred while signup" });
-      }
+      toast.success("Registration successful!");
+      navigate("/Login"); 
+      
     }
   };
 

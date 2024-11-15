@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell } from 'recharts';
-import '../assets/css/Analytics.css';  // Add your CSS file here
+import '../assets/css/Analytics.css'; 
 
 const data = [
   { name: 'Jan', users: 120, booksBorrowed: 300 },
@@ -46,7 +46,6 @@ const Analytics = () => {
 
       {/* Charts */}
       <div className="charts-container">
-        {/* Users Logged In Line Chart */}
         <div className="chart">
           <h3>Users Over Time</h3>
           <LineChart width={400} height={250} data={data}>
@@ -58,8 +57,6 @@ const Analytics = () => {
             <Line type="monotone" dataKey="users" stroke="#8884d8" />
           </LineChart>
         </div>
-
-        {/* Books Borrowed Bar Chart */}
         <div className="chart">
           <h3>Books Borrowed</h3>
           <BarChart width={400} height={250} data={data}>
@@ -71,8 +68,6 @@ const Analytics = () => {
             <Bar dataKey="booksBorrowed" fill="#82ca9d" />
           </BarChart>
         </div>
-
-        {/* Book Genres Pie Chart */}
         <div className="chart">
           <h3>Popular Genres</h3>
           <PieChart width={400} height={250}>

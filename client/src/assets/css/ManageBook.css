@@ -98,6 +98,29 @@
   .sidebar-closed {
     margin-left: 60px;
   }
+  .actions button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  /* background-color: #f1f1f1; */
+  border-radius: 5px;
+}
+
+.edit-btn {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.remove-btn {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.edit-btn i, .remove-btn i {
+  margin-right: 5px;
+}
+
   
   /* Improved Responsive Design */
   @media (max-width: 1024px) {

@@ -1,13 +1,29 @@
 import React, { useState } from 'react';
-import { Navbar } from './Navbar';  // Import Navbar
-import { Sidebar } from './Sidebar'; // Import Sidebar
-import '../assets/css/ManageBook.css'; // Import your CSS
-export const ManageBook = ({ books = [], onRemoveBook }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true); // Sidebar state
+import { Navbar } from './Navbar';
+import { Sidebar } from './Sidebar';
+import '../assets/css/ManageBook.css';
+
+export const ManageBook = ({ books, onRemoveBook, onEditBook }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  // Default values for books
+  const defaultBooks = [
+    {
+      title: 'Sample Book 1',
+      author: 'Author 1',
+      genre: 'Fiction',
+      image: null,
+      pdf: null,
+      url: 'https://example.com'
+    },
+   
+  ];
+
+  const finalBooks = books || defaultBooks;
 
   return (
     <div>
@@ -36,12 +52,12 @@ export const ManageBook = ({ books = [], onRemoveBook }) => {
               </tr>
             </thead>
             <tbody>
-              {books.length === 0 ? (
+              {finalBooks.length === 0 ? (
                 <tr>
                   <td colSpan="7">No books available</td>
                 </tr>
               ) : (
-                books.map((book, index) => (
+                finalBooks.map((book, index) => (
                   <tr key={index}>
                     <td>{book.title}</td>
                     <td>{book.author}</td>
@@ -59,8 +75,13 @@ export const ManageBook = ({ books = [], onRemoveBook }) => {
                     </td>
                     <td>{book.pdf ? <a href={URL.createObjectURL(book.pdf)}>View PDF</a> : 'No PDF'}</td>
                     <td>{book.url ? <a href={book.url}>Visit URL</a> : 'No URL'}</td>
-                    <td>
-                      <button className="remove-btn" onClick={() => onRemoveBook(index)}>Remove</button>
+                    <td className="actions">
+                      <button className="edit-btn" onClick={() => onEditBook(book)}>
+                        <i className="fa fa-pencil"></i> Edit
+                      </button>
+                      <button className="remove-btn" onClick={() => onRemoveBook(index)}>
+                        <i className="fa fa-trash"></i> Remove
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -72,4 +93,5 @@ export const ManageBook = ({ books = [], onRemoveBook }) => {
     </div>
   );
 };
+
 export default ManageBook;

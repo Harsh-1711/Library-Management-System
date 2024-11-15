@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
+import toast from "react-hot-toast"; 
 import "../assets/css/Login.css";
 import InputField from "./InputField"; 
 import Button from "./Button"; 
-
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -42,43 +40,12 @@ function Login() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      try {
-        const response = await axios.post(
-          "http://localhost:8080/api/users/login",
-          {
-            email,
-            password,
-          }
-        );
-
-        if (response.data.success) {
-          toast.success("Login successful!");
-          console.log("Login successful:", response.data);
-          navigate("/");
-        } else {
-          toast.error(response.data.error || "Invalid email or password");
-          setErrors({
-            ...errors,
-            login: response.data.error || "Invalid email or password",
-          });
-        }
-      } catch (error) {
-        console.error("Login error:", error);
-        if (error.response) {
-          toast.error(error.response.data.error);
-          setErrors({
-            ...errors,
-            login:
-              error.response.data.error || "An error occurred while logging in",
-          });
-        } else {
-          toast.error("An unexpected error occurred. Please try again later.");
-          setErrors({ ...errors, login: "An unexpected error occurred." });
-        }
-      }
+    
+      toast.success("Login successful!");
+      navigate("/Dashboard"); 
     }
   };
 
@@ -104,7 +71,6 @@ function Login() {
               placeholder="Enter your email"
             />
 
-           
             <InputField
               label="Password"
               type="password"
@@ -114,16 +80,13 @@ function Login() {
               placeholder="Enter your password"
             />
 
-            
             <div className="checkbox-group">
               <input type="checkbox" id="rememberMe" />
               <label htmlFor="rememberMe">Remember me</label>
             </div>
 
-           
             <Button type="submit" label="Log in" className="login-button" />
 
-          
             <Button
               type="button"
               label="Register"

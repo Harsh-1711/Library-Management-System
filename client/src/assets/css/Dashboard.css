@@ -1,11 +1,9 @@
-/* General Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -74,16 +72,15 @@
   font-weight: bold;
 }
 
-/* Dashboard container */
 .dashboard-container {
   display: flex;
   min-height: 100vh;
   background-color: #f4f7fc;
   font-family: 'Roboto', sans-serif;
-  padding-top: 60px; /* space for fixed navbar */
+  padding-top: 60px; 
 }
 
-/* Sidebar Styles */
+
 .sidebar {
   width: 250px;
   background-color: #2c3e50;
@@ -91,9 +88,9 @@
   padding: 20px;
   transition: transform 0.3s ease-in-out;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  position: fixed; /* Sidebar fixed under navbar */
-  top: 60px; /* Align below navbar */
-  height: calc(100vh - 60px); /* Adjust height to exclude navbar */
+  position: fixed; 
+  top: 60px; 
+  height: calc(100vh - 60px); 
   overflow-y: auto;
 }
 
@@ -103,7 +100,7 @@
 
 .sidebar ul {
   list-style-type: none;
-  padding-left: 0; /* No padding on the main list */
+  padding-left: 0; 
 }
 
 .sidebar ul li {
@@ -127,7 +124,7 @@
   color: #fff;
 }
 
-/* Dropdown Styles */
+
 .dropdown-header {
   cursor: pointer;
 }
