@@ -1,0 +1,197 @@
+.book-table {
+    width: 95%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .book-table th, .book-table td {
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 16px;
+  }
+  
+  .book-table th {
+    background-color: #2c3e50;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .book-table td {
+    background-color: #ffffff;
+  }
+  
+  .book-table img.book-image {
+    max-width: 80px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Buttons */
+  .remove-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 8px 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .remove-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Sidebar and Main Content */
+  .dashboard-container {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    height: 100vh;
+    color: #ecf0f1;
+    padding: 20px;
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .sidebar.closed {
+    width: 60px;
+  }
+  
+  .sidebar a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar a:hover {
+    background-color: #34495e;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    background-color: #f9f9f9;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .sidebar-open {
+    margin-left: 250px;
+  }
+  
+  .sidebar-closed {
+    margin-left: 60px;
+  }
+  .actions button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  /* background-color: #f1f1f1; */
+  border-radius: 5px;
+}
+
+.edit-btn {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.remove-btn {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.edit-btn i, .remove-btn i {
+  margin-right: 5px;
+}
+
+  
+  /* Improved Responsive Design */
+  @media (max-width: 1024px) {
+    .book-table th, .book-table td {
+      padding: 10px;
+      font-size: 14px;
+    }
+  
+    .book-table img.book-image {
+      max-width: 60px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .dashboard-container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      height: auto;
+    }
+  
+    .main-content {
+      margin-left: 0;
+    }
+  
+    .book-table, .book-table thead, .book-table tbody, .book-table th, .book-table td, .book-table tr {
+      display: block;
+      width: 100%;
+    }
+  
+    .book-table tr {
+      margin-bottom: 10px;
+    }
+  
+    .book-table th {
+      display: none;
+    }
+  
+    .book-table td {
+      display: block;
+      text-align: right;
+      position: relative;
+      padding-left: 50%;
+      border-bottom: 1px solid #ddd;
+    }
+  
+    .book-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      text-align: left;
+      font-weight: bold;
+    }
+  
+    .remove-btn {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+  
+  /* Mobile Design */
+  @media (max-width: 480px) {
+    .book-table td {
+      padding-left: 40%;
+    }
+  
+    .remove-btn {
+      padding: 4px 8px;
+      font-size: 10px;
+    }
+  }
+  

@@ -59,7 +59,7 @@ function Signup() {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (validate()) {

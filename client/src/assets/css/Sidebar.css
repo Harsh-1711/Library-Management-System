@@ -1,0 +1,38 @@
+/* .sidebar {
+    width: 250px;
+    background-color: #1c1c1c;
+    height: 100vh;
+    transition: width 0.3s;
+  }
+  
+  .sidebar.closed {
+    width: 80px;
+  }
+  
+  .sidebar h2 {
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 10px 20px;
+  }
+  
+  .sidebar ul li ul {
+    padding-left: 20px;
+  }
+  
+  .sidebar a {
+    color: #b3b3b3;
+    text-decoration: none;
+  }
+  
+  .sidebar a.active {
+    color: #00bfa5;
+  }
+   */
